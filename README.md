@@ -97,6 +97,7 @@ After installation, the following default configurations will be set up:
 - **Library Path**: The local media library is located at `/mnt/library`, where Riven and Plex scan, manage, and serve your content.
 
 - **Riven Configuration**: You can find the `settings.json` file for Riven in the `riven` folder, located in the same directory where the scripts reside.
+    - when logging into riven FE for the first time, the requested backend url is http://riven:8080, and api key is in riven/riven/settings.json
 
 - **Riven Database**: The Riven database is stored in `/home/docker/riven-db`.
 

@@ -11,8 +11,8 @@ NC='\033[0m' # No Color
 
 # Check for root privileges
 if [[ $EUID -ne 0 ]]; then
-   echo -e "${RED}Error: This script must be run with administrative privileges. Please run with sudo.${NC}"
-   exit 1
+    echo -e "${RED}Error: This script must be run with administrative privileges. Please run with sudo.${NC}"
+    exit 1
 fi
 
 echo -e "${GREEN}Plex Media Server Configuration${NC}"
@@ -43,7 +43,7 @@ if [[ "$PLEX_INSTALL" =~ ^[Yy][Ee]?[Ss]?$ ]]; then
 
     # Create docker-compose.yml for Plex
     echo -e "${GREEN}Creating Plex docker-compose.yml...${NC}"
-    cat <<EOF > ./plex/docker-compose.yml
+    cat <<EOF >./plex/docker-compose.yml
 version: '3.8'
 
 services:
@@ -51,6 +51,7 @@ services:
     image: plexinc/pms-docker
     container_name: plex
     restart: unless-stopped
+    network_mode: host
     environment:
       - TZ=$TZ
       - PLEX_CLAIM=$PLEX_CLAIM
@@ -58,8 +59,6 @@ services:
       - ./plex/config:/config
       - ./plex/transcode:/transcode
       - /mnt:/mnt
-    ports:
-      - "32400:32400"
 EOF
 
     # Start Plex
@@ -76,7 +75,7 @@ EOF
     read -p "$(echo -e "${YELLOW}Press Enter to continue after you have completed Plex setup...${NC}")"
 
     # Since Plex was installed by this script, set RIVEN_PLEX_URL accordingly
-    echo "http://plex:32400" > RIVEN_PLEX_URL.txt
+    echo "http://plex:32400" >RIVEN_PLEX_URL.txt
 else
     echo -e "${GREEN}Skipping Plex setup.${NC}"
     # Prompt for RIVEN_PLEX_URL
@@ -86,5 +85,5 @@ else
         echo -e "${RED}Error: RIVEN_PLEX_URL cannot be empty.${NC}"
         exit 1
     fi
-    echo "$RIVEN_PLEX_URL" > RIVEN_PLEX_URL.txt
+    echo "$RIVEN_PLEX_URL" >RIVEN_PLEX_URL.txt
 fi

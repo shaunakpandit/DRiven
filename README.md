@@ -61,7 +61,9 @@ Running `windows_proxy.bat` will ensure that any ports exposed by Docker contain
 
 #### NOTE
 - During installation, you’ll have the option to install Plex Media Server.
-- Zurg and rclone will be automatically installed **only if they are not present** in the directory. If they are already installed, the script will skip their installation.
+- Zurg and rclone will be automatically installed **only if they are not present** in the directory. If they are already installed, the script will skip their installation. 
+    - Zurg setup can often have an odd bug with setting real-debrid API key. Post install, check `DRiven/zurg/config.yml`. Ensure that API key is correct
+  
 
 ## Bypass Riven Onboarding with Pre-Configured Settings
 
